@@ -31,8 +31,8 @@
     <hook type="after_plugin_install" src="hooks/add_swift_support.js" />
 
     <config-file target="config.xml" parent="/widget">
-      <feature name="Hello">
-        <param name="ios-package" value="HWPHello" />
+      <feature name="Coap">
+        <param name="ios-package" value="HWCoapPlugin" />
       </feature>
     </config-file>
 
@@ -44,7 +44,7 @@
     <!--<source-file src="src/ios/SCMessage.swift"/>-->
     <!--<source-file src="src/ios/SCServer.swift"/>-->
 
-    <header-file src="src/ios/Hello.swift"/>
+    <source-file src="src/ios/Coap.swift"/>
   </platform>
 
   <platform name="wp7">

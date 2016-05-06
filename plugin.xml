@@ -3,22 +3,22 @@
         id="com.phodal.plugin.coap"
         version="0.0.1">
 
-  <name>coap</name>
+  <name>Hello</name>
 
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
   </engines>
 
-  <asset src="www/coap.js" target="js/coap.js"/>
+  <asset src="www/hello.js" target="js/hello.js"/>
 
-  <js-module src="www/coap.js" name="coap">
-    <clobbers target="coap" />
+  <js-module src="www/hello.js" name="hello">
+    <clobbers target="hello" />
   </js-module>
 
   <platform name="android">
 
     <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="coap">
+      <feature name="Hello">
         <param name="android-package" value="com.phodal.plugin.coap"/>
       </feature>
     </config-file>
@@ -28,6 +28,7 @@
   </platform>
 
   <platform name="ios">
+    <hook type="after_plugin_install" src="hooks/add_swift_support.js" />
 
     <config-file target="config.xml" parent="/widget">
       <feature name="Hello">
@@ -35,8 +36,15 @@
       </feature>
     </config-file>
 
-    <header-file src="src/ios/HWPHello.h" target-dir="HelloPlugin"/>
-    <source-file src="src/ios/HWPHello.m" target-dir="HelloPlugin"/>
+    <!--<header-file src="src/ios/GCDAsyncUdpSocket.h"/>-->
+    <!--<source-file src="src/ios/GCDAsyncUdpSocket.m"/>-->
+
+    <header-file src="src/ios/Bridging-Header.h"/>
+    <!--<source-file src="src/ios/SCClient.swift"/>-->
+    <!--<source-file src="src/ios/SCMessage.swift"/>-->
+    <!--<source-file src="src/ios/SCServer.swift"/>-->
+
+    <header-file src="src/ios/Hello.swift"/>
   </platform>
 
   <platform name="wp7">

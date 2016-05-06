@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        id="com.example.hello"
-        version="0.7.0">
+        id="com.phodal.plugin.coap"
+        version="0.0.1">
 
-  <name>Hello</name>
+  <name>coap</name>
 
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
   </engines>
 
-  <asset src="www/hello.js" target="js/hello.js"/>
+  <asset src="www/coap.js" target="js/coap.js"/>
 
-  <js-module src="www/hello.js" name="hello">
-    <clobbers target="hello" />
+  <js-module src="www/coap.js" name="coap">
+    <clobbers target="coap" />
   </js-module>
 
   <platform name="android">
 
     <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="Hello">
-        <param name="android-package" value="com.example.plugin.Hello"/>
+      <feature name="coap">
+        <param name="android-package" value="com.phodal.plugin.coap"/>
       </feature>
     </config-file>
 
-    <source-file src="src/android/Hello.java" target-dir="src/com/example/plugin/"/>
+    <source-file src="src/android/coap.java" target-dir="src/com/phodal/plugin/"/>
+    <source-file src="src/android/lib/californium-core-1.0.4.jar" target-dir="libs" />
   </platform>
 
   <platform name="ios">
-    
+
     <config-file target="config.xml" parent="/widget">
       <feature name="Hello">
         <param name="ios-package" value="HWPHello" />

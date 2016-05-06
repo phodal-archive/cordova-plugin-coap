@@ -36,13 +36,14 @@
       </feature>
     </config-file>
 
-    <!--<header-file src="src/ios/GCDAsyncUdpSocket.h"/>-->
-    <!--<source-file src="src/ios/GCDAsyncUdpSocket.m"/>-->
+    <header-file src="src/ios/GCDAsyncUdpSocket.h"/>
+    <source-file src="src/ios/GCDAsyncUdpSocket.m"/>
 
     <header-file src="src/ios/Bridging-Header.h"/>
-    <!--<source-file src="src/ios/SCClient.swift"/>-->
-    <!--<source-file src="src/ios/SCMessage.swift"/>-->
-    <!--<source-file src="src/ios/SCServer.swift"/>-->
+
+    <source-file src="src/ios/SCClient.swift"/>
+    <source-file src="src/ios/SCMessage.swift"/>
+    <source-file src="src/ios/SCServer.swift"/>
 
     <source-file src="src/ios/Coap.swift"/>
   </platform>

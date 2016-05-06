@@ -3,3 +3,4 @@
 //
 
 #import <Cordova/CDV.h>
+#import "GCDAsyncUdpSocket.h"

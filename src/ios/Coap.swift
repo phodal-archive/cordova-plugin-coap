@@ -1,9 +1,20 @@
 
 import Foundation
 
+func log(message: String){
+    NSLog("%@ - %@", "CoAP Plugin", message)
+}
+
+func log(messages: [String]) {
+    for message in messages {
+        log(message);
+    }
+}
+
 @objc(HWCoapPlugin) class Coap : CDVPlugin {
     var syncMessage = ""
     let separatorLine = "\n-----------------\n"
+    var getId = "";
 
     func get(command: CDVInvokedUrlCommand) {
 
@@ -14,13 +25,17 @@ import Foundation
         let coapClient = SCClient(delegate: self)
         coapClient.sendCoAPMessage(m, hostName: "192.168.31.170", port: 5683)
 
-        let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: syncMessage)
-        commandDelegate.sendPluginResult(pluginResult, callbackId:command.callbackId)
+        getId = command.callbackId
     }
 
     func test(command: CDVInvokedUrlCommand) {
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: "Hello World")
         commandDelegate.sendPluginResult(pluginResult, callbackId:command.callbackId)
+    }
+
+    private func notify (message: String) {
+        let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: message);
+        commandDelegate!.sendPluginResult(pluginResult, callbackId:getId);
     }
 }
 
@@ -32,15 +47,15 @@ extension Coap: SCClientDelegate {
                 payloadstring = String(string)
             }
         }
-        syncMessage = payloadstring
+        self.notify(payloadstring)
     }
 
     func swiftCoapClient(client: SCClient, didFailWithError error: NSError) {
         syncMessage = "Failed with Error \(error.localizedDescription)" + separatorLine + separatorLine
+        self.notify(syncMessage)
     }
 
     func swiftCoapClient(client: SCClient, didSendMessage message: SCMessage, number: Int) {
-//        syncMessage =  "Message sent (\(number)) with type: \(message.type.shortString()) with id: \(message.messageId)\n" + separatorLine + separatorLine
-        syncMessage = "Message Sent"
+        log("Message Sent")
     }
 }

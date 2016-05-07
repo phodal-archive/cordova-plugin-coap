@@ -1,4 +1,4 @@
-#Cordova Plugin for Californium (Cf) CoAP framework
+#Cordova Plugin CoAP
 
 > Just Start it.
 

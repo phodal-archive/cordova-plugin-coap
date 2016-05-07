@@ -2,6 +2,7 @@
 import Foundation
 
 @objc(HWCoapPlugin) class Coap : CDVPlugin {
+    var syncMessage = ""
     let separatorLine = "\n-----------------\n"
 
     func get(command: CDVInvokedUrlCommand) {
@@ -11,13 +12,13 @@ import Foundation
         m.addOption(SCOption.UriPath.rawValue, data: "test".dataUsingEncoding(NSUTF8StringEncoding)!)
 
         let coapClient = SCClient(delegate: self)
-        coapClient.sendCoAPMessage(m, hostName: "coap.me", port: 5683)
+        coapClient.sendCoAPMessage(m, hostName: "192.168.31.170", port: 5683)
 
-        let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: "Hello World")
+        let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: syncMessage)
         commandDelegate.sendPluginResult(pluginResult, callbackId:command.callbackId)
     }
-    func test(command: CDVInvokedUrlCommand) {
 
+    func test(command: CDVInvokedUrlCommand) {
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: "Hello World")
         commandDelegate.sendPluginResult(pluginResult, callbackId:command.callbackId)
     }
@@ -31,24 +32,15 @@ extension Coap: SCClientDelegate {
                 payloadstring = String(string)
             }
         }
-        _ = "Message received with type: \(message.type.shortString())\nwith code: \(message.code.toString()) \nwith id: \(message.messageId)\nPayload: \(payloadstring)"
-        var optString = "Options:\n"
-        for (key, _) in message.options {
-            var optName = "Unknown"
-
-            if let knownOpt = SCOption(rawValue: key) {
-                optName = knownOpt.toString()
-            }
-
-            optString += "\(optName) (\(key))"
-        }
+        syncMessage = payloadstring
     }
 
     func swiftCoapClient(client: SCClient, didFailWithError error: NSError) {
-
+        syncMessage = "Failed with Error \(error.localizedDescription)" + separatorLine + separatorLine
     }
 
     func swiftCoapClient(client: SCClient, didSendMessage message: SCMessage, number: Int) {
-
+//        syncMessage =  "Message sent (\(number)) with type: \(message.type.shortString()) with id: \(message.messageId)\n" + separatorLine + separatorLine
+        syncMessage = "Message Sent"
     }
 }

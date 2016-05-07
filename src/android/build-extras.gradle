@@ -1,10 +1,10 @@
-
 android {
     packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
+        exclude 'about.html'
+        exclude 'edl-v10.html'
+        exclude 'epl-v10.html'
+        exclude 'notice.html'
+        exclude 'META-INF/ECLIPSE_.RSA'
+        exclude 'META-INF/ECLIPSE_.SF'
     }
 }

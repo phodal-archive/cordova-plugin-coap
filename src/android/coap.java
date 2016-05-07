@@ -12,37 +12,34 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class Coap extends CordovaPlugin {
-    CallbackContext syncCB, asyncCB;
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         if (action.equals("get")) {
-            this.syncCB = callbackContext;
-            Log.d("get ", "\n test for get");
+            Log.d("Coap ", "\n test for get");
 
             try {
                 URI uri = new URI("coap://192.168.31.170/");
                 CoapClient mCoapClient = new CoapClient(uri);
                 CoapResponse response = mCoapClient.get();
-                syncCB.success(response.getResponseText() + "=============");
+                callbackContext.success(response.getResponseText() + "=============");
+                return true;
             } catch (URISyntaxException e) {
-                Log.e("error", "URISyntaxException");
-                syncCB.error("URISyntaxException");
+                Log.e("Coap", "URISyntaxException");
+                callbackContext.error("URISyntaxException");
+                return false;
             } catch (Exception e) {
-                Log.e("error", "Exception");
-                syncCB.error("Exception");
+                Log.e("Coap", "Exception");
+                callbackContext.error("Exception");
+                return false;
             }
-
-            return true;
         } else if (action.equals("test"))
 
         {
-            Log.d("test", "\n test for test");
+            Log.d("Coap", "\n test for test");
             callbackContext.success("test");
             return true;
-        } else
-
-        {
+        } else {
             return false;
         }
     }

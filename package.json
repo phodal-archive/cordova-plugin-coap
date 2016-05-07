@@ -1,0 +1,16 @@
+{
+    "version": "0.0.1",
+    "name": "cordova-plugin-coap",
+    "cordova_name": "Coap",
+    "platforms": [
+        "android",
+        "ios",
+        "wp7"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.4.0"
+        }
+    ]
+}

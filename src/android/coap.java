@@ -29,17 +29,39 @@ public class Coap extends CordovaPlugin {
                 Log.e("Coap", "URISyntaxException");
                 callbackContext.error("URISyntaxException");
                 return false;
+            }
+        } else if(action.equals("post")) {
+            Log.d("Coap ", "\n test for post");
+
+            try {
+                URI uri = new URI(data.getString(0));
+                CoapClient mCoapClient = new CoapClient(uri);
+                CoapResponse response = mCoapClient.post(data.getString(1), 0);
+                callbackContext.success(response.getResponseText());
+                return true;
+            } catch (URISyntaxException e) {
+                Log.e("Coap", "URISyntaxException");
+                callbackContext.error("URISyntaxException");
+                return false;
             } catch (Exception e) {
                 Log.e("Coap", "Exception");
                 callbackContext.error("Exception");
                 return false;
             }
-        } else if (action.equals("test"))
+        } else if (action.equals("test")) {
+            Log.d("Coap ", "\n test for get");
 
-        {
-            Log.d("Coap", "\n test for test");
-            callbackContext.success("test");
-            return true;
+            try {
+                URI uri = new URI("coap://iot.eclipse.org/test");
+                CoapClient mCoapClient = new CoapClient(uri);
+                CoapResponse response = mCoapClient.get();
+                callbackContext.success(response.getResponseText());
+                return true;
+            } catch (URISyntaxException e) {
+                Log.e("Coap", "URISyntaxException");
+                callbackContext.error("URISyntaxException");
+                return false;
+            }
         } else {
             return false;
         }

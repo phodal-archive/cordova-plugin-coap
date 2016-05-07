@@ -1,35 +1,46 @@
 package com.phodal.plugin;
 
 import org.apache.cordova.*;
-
+import org.eclipse.californium.core.CoapClient;
+import org.eclipse.californium.core.CoapResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import org.eclipse.californium.core.CoapClient;
-import org.eclipse.californium.core.CoapResponse;
+import android.util.Log;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.UnknownHostException;
 
 public class Coap extends CordovaPlugin {
+    CallbackContext syncCB, asyncCB;
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         if (action.equals("get")) {
+            this.syncCB = callbackContext;
+            Log.i("get ", "\n test for get");
+
             try {
-                URI uri = new URI("coap://vs0.inf.ethz.ch:5683/");
+                URI uri = new URI("coap://192.168.31.170/");
                 CoapClient mCoapClient = new CoapClient(uri);
                 CoapResponse response = mCoapClient.get();
-                callbackContext.success(response.getResponseText());
-                return true;
+                syncCB.success(response.getResponseText() + "=============");
             } catch (URISyntaxException e) {
-                return false;
+                syncCB.error("URISyntaxException");
+            } catch (Exception e) {
+                syncCB.error("Exception");
             }
-        } else if (action.equals("test")) {
+
+            return true;
+        } else if (action.equals("test"))
+
+        {
+            Log.i("test", "\n test for test");
             callbackContext.success("test");
             return true;
-        } else {
+        } else
+
+        {
             return false;
         }
     }

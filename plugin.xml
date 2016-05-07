@@ -47,7 +47,7 @@
     <header-file src="src/ios/GCDAsyncUdpSocket.h"/>
     <source-file src="src/ios/GCDAsyncUdpSocket.m"/>
 
-    <header-file src="src/ios/Bridging-Header.h"/>
+    <header-file src="src/ios/CoAP-Bridging-Header.h"/>
 
     <source-file src="src/ios/SCClient.swift"/>
     <source-file src="src/ios/SCMessage.swift"/>

@@ -18,7 +18,7 @@ public class Coap extends CordovaPlugin {
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         if (action.equals("get")) {
             this.syncCB = callbackContext;
-            Log.i("get ", "\n test for get");
+            Log.d("get ", "\n test for get");
 
             try {
                 URI uri = new URI("coap://192.168.31.170/");
@@ -26,8 +26,10 @@ public class Coap extends CordovaPlugin {
                 CoapResponse response = mCoapClient.get();
                 syncCB.success(response.getResponseText() + "=============");
             } catch (URISyntaxException e) {
+                Log.e("error", "URISyntaxException");
                 syncCB.error("URISyntaxException");
             } catch (Exception e) {
+                Log.e("error", "Exception");
                 syncCB.error("Exception");
             }
 
@@ -35,7 +37,7 @@ public class Coap extends CordovaPlugin {
         } else if (action.equals("test"))
 
         {
-            Log.i("test", "\n test for test");
+            Log.d("test", "\n test for test");
             callbackContext.success("test");
             return true;
         } else

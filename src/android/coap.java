@@ -12,6 +12,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class Coap extends CordovaPlugin {
+    URI uri;
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
@@ -19,10 +20,10 @@ public class Coap extends CordovaPlugin {
             Log.d("Coap ", "\n test for get");
 
             try {
-                URI uri = new URI("coap://192.168.31.170/");
+                URI uri = new URI(data.getString(0));
                 CoapClient mCoapClient = new CoapClient(uri);
                 CoapResponse response = mCoapClient.get();
-                callbackContext.success(response.getResponseText() + "=============");
+                callbackContext.success(response.getResponseText());
                 return true;
             } catch (URISyntaxException e) {
                 Log.e("Coap", "URISyntaxException");

@@ -1,7 +1,13 @@
-#Cordova Plugin CoAP
+#Cordova Plugin CoAP 
 
-> Just Start it.
+(ps: Just Start it, and can done my job. If you would like to use it, please let me know it.)
 
+Native Libs
+---
 
-MIT 
+ - [Eclipse Californium](https://github.com/eclipse/californium)
+ - [SwiftCoAP](https://github.com/stuffrabbit/SwiftCoAP)
+
+License
 ----
+MIT 

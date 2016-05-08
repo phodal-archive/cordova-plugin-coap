@@ -8,3 +8,8 @@ android {
         exclude 'META-INF/ECLIPSE_.SF'
     }
 }
+
+dependencies {
+    compile 'org.eclipse.californium:californium-core:1.0.4'
+    compile 'org.eclipse.californium:element-connector:1.0.4'
+}

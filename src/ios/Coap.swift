@@ -18,6 +18,16 @@ func log(messages: [String]) {
 
     func get(command: CDVInvokedUrlCommand) {
 
+        let m = SCMessage(code: SCCodeValue(classValue: 0, detailValue: 01)!, type: .Confirmable)
+
+        let coapClient = SCClient(delegate: self)
+        coapClient.sendCoAPMessage(m, hostName: command.arguments[0], port: 5683)
+
+        getId = command.callbackId
+    }
+
+    func post(command: CDVInvokedUrlCommand) {
+
         let m = SCMessage(code: SCCodeValue(classValue: 0, detailValue: 01)!, type: .Confirmable, payload: "test".dataUsingEncoding(NSUTF8StringEncoding))
 
         m.addOption(SCOption.UriPath.rawValue, data: "test".dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -27,6 +37,8 @@ func log(messages: [String]) {
 
         getId = command.callbackId
     }
+
+
 
     func test(command: CDVInvokedUrlCommand) {
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: "Hello World")
